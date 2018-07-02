@@ -1,0 +1,48 @@
+{
+  "name": "jadestorm-patroni",
+  "version": "1.0.0",
+  "author": "jadestorm",
+  "summary": "Installs and manages Patroni for high-availability PostgreSQL",
+  "license": "Apache-2.0",
+  "source": "https://github.com/jadestorm/puppet-patroni",
+  "project_page": "https://github.com/jadestorm/puppet-patroni",
+  "issues_url": "https://github.com/jadestorm/puppet-patroni/issues",
+  "dependencies": [
+
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.7.0 < 6.0.0"
+    }
+  ],
+  "pdk-version": "1.5.0",
+  "template-url": "file://C:/Program Files/Puppet Labs/DevelopmentKit/share/cache/pdk-templates.git",
+  "template-ref": "1.5.0-0-gd1b3eca"
+}
