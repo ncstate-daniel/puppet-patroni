@@ -48,6 +48,11 @@ also need a variety of other components to accomplish anything useful with Patro
 You also need to make sure the patroni package is available somewhere.  For RPM based systems, you can
 get the package from [here](https://github.com/cybertec-postgresql/patroni-packaging/releases).
 
+You will also need to get PostgreSQL itself installed yourself.  Patroni handles starting PostgreSQL on it's own,
+but you need to get the software installed.  One pretty easy recommendation I have is to simply pull in
+[puppetlab's postgresql module](https://forge.puppet.com/puppetlabs/postgresql) and make use of the
+::postgresql::globals class.  We will demonstrate a very simple recipe for that below.
+
 ### Beginning with patroni
 
 The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
