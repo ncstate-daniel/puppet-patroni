@@ -80,12 +80,12 @@ class patroni::params {
           $pgsql_config_dir = $pgsql_data_dir
         }
         default: {
-          fail { "This operating system version (${::operatingsystemmajrelease}) is not supported.": }
+          fail("This operating system version (${::operatingsystemmajrelease}) is not supported.")
         }
       }
     }
     default: {
-      fail { "This operating system family (${::osfamily}) is not supported.": }
+      fail("This operating system family (${::osfamily}) is not supported.")
     }
   }
 }
