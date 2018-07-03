@@ -83,7 +83,7 @@ class patroni (
   String $etcd_key       = undef,
 
   # Exhibitor Settings
-  Boolena $use_exhibitor           = $patroni::params::use_exhibitor,
+  Boolean $use_exhibitor           = $patroni::params::use_exhibitor,
   Array[String] $exhibitor_hosts   = [],
   Integer $exhibitor_poll_interval = $patroni::params::exhibitor_poll_interval,
   Integer $exhibitor_port          = $patroni::params::exhibitor_port,
