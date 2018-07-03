@@ -44,6 +44,7 @@ class patroni::params {
   $consul_host   = 'localhost'
   $consul_port   = 8500
   $consul_scheme = 'http'
+  $consul_verify = false
 
   $use_etcd      = false
   $etcd_host     = '127.0.0.1:2379'
@@ -55,6 +56,7 @@ class patroni::params {
 
   $use_kubernetes           = false
   $kubernetes_use_endpoints = false
+  $kubernetes_namespace     = 'default'
 
   $restapi_connect_address = '127.0.0.1:8008'
   $restapi_listen          = '0.0.0.0:8008'
