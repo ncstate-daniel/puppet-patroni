@@ -75,7 +75,7 @@ class patroni::params {
       $config_mode  = '0644'
 
       case $::operatingsystemmajrelease {
-        7: {
+        '7': {
           $pgsql_data_dir   = '/var/lib/pgsql/9.2/data'
           $pgsql_config_dir = $pgsql_data_dir
         }
