@@ -1,0 +1,254 @@
+scope: <%= @scope %>
+namespace: <%= @namespace %>
+name: <%= @hostname %>
+
+bootstrap:
+  dcs:
+    ttl: <%= @dcs_ttl %>
+    loop_wait: <%= @dcs_loop_wait %>
+    retry_timeout: <%= @dcs_retry_timeout %>
+    maximum_lag_on_failover: <%= @dcs_maximum_lag_on_failover %>
+    master_start_timeout: <%= @dcs_master_start_timeout %>
+    synchronous_mode: <%= @dcs_synchronous_mode %>
+    synchronous_mode_struct: <%= @dcs_synchronous_mode_strict %>
+    postgresql:
+      use_pg_rewind: <%= @dcs_postgresql_use_pg_rewind ? 'true' : 'false' %>
+      use_slots: <%= @dcs_postgresql_use_slots ? 'true' : 'false' %>
+<% unless @dcs_postgresql_recovery_conf.empty? -%>
+      recovery_conf:
+<% @dcs_postgresql_recovery_conf.each do |name,val| -%>
+        <%= name -%>: <%= val %>
+<% end -%>
+<% end -%>
+<% unless @dcs_postgresql_parameters.empty? -%>
+      parameters:
+<% @dcs_postgresql_parameters.each do |name,val| -%>
+        <%= name -%>: <%= val %>
+<% end -%>
+<% end -%>
+  method: <%= @bootstrap_method %>
+  initdb:
+<% if @initdb_data_checksums -%>
+    - data-checksums
+<% end -%>
+    - encoding: <%= @initdb_encoding %>
+    - locale: <%= @initdb_locale %>
+<% unless @bootstrap_pg_hba.empty? -%>
+  pg_hba:
+<% @bootstrap_pg_hba.each do |entry| -%>
+    - <%= entry -%>
+<% end -%>
+<% end -%>
+<% unless @bootstrap_users.empty? -%>
+  users:
+<% @bootstrap_users.each do |name,settings| -%>
+    <%= name -%>:
+<% if settings[password] -%>
+      password: <%= settings[password] %>
+<% end -%>
+<% if settings[options] && settings[options].empty? -%>
+      options:
+<% settings[options].each do |option| -%>
+        - <%= option -%>
+<% end -%>
+<% end -%>
+<% end -%>
+<% end -%>
+<% if @bootstrap_post_bootstrap != nil -%>
+  post_bootstrap: <%= @bootstrap_post_bootstrap %>
+<% end -%>
+<% if @bootstrap_post_init != nil -%>
+  post_init: <%= @bootstrap_post_init %>
+<% end -%>
+
+postgresql:
+  listen: <%= @pgsql_listen %>
+  connect_address: <%= @pgsql_connect_address %>
+  data_dir: <%= @pgsql_data_dir %>
+  bin_dir: <%= @pgsql_bin_dir %>
+  config_dir: <%= @pgsql_config_dir %>
+  use_unix_socket: <%= @pgsql_use_unix_socket ? 'true' : 'false' %>
+  pgpass: <%= @pgsql_pgpass_path %>
+  pg_ctl_timeout: <%= @pgsql_pg_ctl_timeout %>
+  use_pg_rewind: <%= @pgsql_use_pg_rewind ? 'true' : 'false' %>
+  remove_data_directory_on_rewind_failure: <%= @pgsql_remove_data_directory_on_rewind_failure ? 'true' : 'false' %>
+  authentication:
+    superuser:
+      username: <%= @superuser_username %>
+      password: <%= @superuser_password %>
+    replication:
+      username: <%= @replication_username %>
+      password: <%= @replication_password %>
+<% unless @callback_on_reload == nil && @callback_on_restart == nil && @callback_on_role_change == nil && @callback_on_start == nil && @callback_on_stop == nil -%>
+  callbacks:
+<% if @callback_on_reload != nil -%>
+    on_reload: <%= @callback_on_reload %>
+<% end -%>
+<% if @callback_on_restart != nil -%>
+    on_restart: <%= @callback_on_restart %>
+<% end -%>
+<% if @callback_on_role_change != nil -%>
+    on_role_change: <%= @callback_on_role_change %>
+<% end -%>
+<% if @callback_on_start != nil -%>
+    on_start: <%= @callback_on_start %>
+<% end -%>
+<% if @callback_on_stop != nil -%>
+    on_stop: <%= @callback_on_stop %>
+<% end -%>
+<% end -%>
+<% unless @pgsql_create_replica_methods.empty? -%>
+  create_replica_methods:
+<% @pgsql_create_replica_methods.each do |entry| -%>
+    - <%= entry %>
+<% end -%>
+<% end -%>
+<% unless @pgsql_recovery_conf.empty? -%>
+  recovery_conf:
+<% @pgsql_recovery_conf.each do |name,val| -%>
+    <%= name -%>: <%= val %>
+<% end -%>
+<% unless @pgsql_custom_conf.empty? -%>
+  custom_conf:
+<% @pgsql_custom_conf.each do |name,val| -%>
+    <%= name -%>: <%= val %>
+<% end -%>
+<% unless @pgsql_parameters.empty? -%>
+  parameters:
+<% @pgsql_parameters.each do |name,val| -%>
+    <%= name -%>: <%= val %>
+<% end -%>
+<% unless @pgsql_replica_method.empty? -%>
+  replica_method:
+<% @pgsql_replica_method.each do |name,settings| -%>
+    <%= name -%>:
+<% settings.each do |setname,setval| -%>
+      <%= setname -%>: <%= setval %>
+<% end -%>
+<% end -%>
+
+restapi:
+  listen: <%= @restapi_listen %>
+  connect_address: <%= @restapi_connect_address %>
+<% if @restapi_certfile != nil -%>
+  certfile: <%= @restapi_certfile %>
+<% end -%>
+<% if @restapi_keyfile != nil -%>
+  keyfile: <%= @restapi_keyfile %>
+<% end -%>
+<% if @restapi_username != nil && @restapi_password != nil -%>
+  authentication:
+    username: <%= @restapi_username %>
+    password: <%= @restapi_password %>
+<% end -%>
+
+watchdog:
+  mode: <%= @watchdog_mode %>
+  device: <%= @watchdog_device %>
+  safety_margin: <%= @watchdog_safety_margin %>
+<% if @use_etcd -%>
+
+etcd:
+  host: <%= @etcd_host %>
+<% unless @etcd_hosts.empty? -%>
+  hosts:
+<% @etcd_hosts.each do |entry| -%>
+    - <%= entry %>
+<% end -%>
+<% end -%>
+<% if @etcd_url != nil -%>
+  url: <%= @etcd_url %>
+<% end -%>
+<% if @etcd_proxy != nil -%>
+  proxy: <%= @etcd_proxy %>
+<% end -%>
+<% if @etcd_srv != nil -%>
+  srv: <%= @etcd_srv %>
+<% end -%>
+<% if @etcd_protocol != nil -%>
+  protocol: <%= @etcd_protocol %>
+<% end -%>
+<% if @etcd_username != nil -%>
+  username: <%= @etcd_username %>
+<% end -%>
+<% if @etcd_password != nil -%>
+  password: <%= @etcd_password %>
+<% end -%>
+<% if @etcd_cacert != nil -%>
+  cacert: <%= @etcd_cacert %>
+<% end -%>
+<% if @etcd_cert != nil -%>
+  cert: <%= @etcd_cert %>
+<% end -%>
+<% if @etcd_key != nil -%>
+  key: <%= @etcd_key %>
+<% end -%>
+<% end -%>
+<% @use_zookeeper -%>
+
+zookeeper:
+  hosts: <%= @zookeeper_hosts.join(',') %>
+<% end -%>
+<% @use_exhibitor -%>
+
+exhibitor:
+  hosts:
+<% @exhibitor_hosts.each do |entry| -%>
+    - <%= entry %>
+<% end -%>
+  poll_interval: <%= @exhibitor_poll_interval %>
+  port: <%= @exhibitor_port %>
+<% end -%>
+<% @use_kubernetes -%>
+
+kubernetes:
+  namespace: <%= @kubernetes_namespace %>
+  use_endpoints: <%= @kubernetes_use_endpoints ? 'true' : 'false' %>
+<% unless @kubernetes_labels.empty? -%>
+  labels:
+<% @kubernetes_labels.each do |name,val| -%>
+    <%= name -%>: <%= val %>
+<% end -%>
+<% end -%>
+<% if @kubernetes_scope_label != nil -%>
+  scope_label: <%= @kubernetes_scope_label %>
+<% end -%>
+<% if @kubernetes_role_label != nil -%>
+  role_label: <%= @kubernetes_role_label %>
+<% end -%>
+<% if @kubernetes_pod_ip != nil -%>
+  pod_ip: <%= @kubernetes_pod_ip %>
+<% end -%>
+<% if @kubernetes_ports != nil -%>
+  ports: <%= @kubernetes_ports %>
+<% end -%>
+<% end -%>
+<% @use_consul -%>
+
+consul:
+  host: <%= @consul_host %>
+  port: <%= @consul_port %>
+  scheme: <%= @consul_scheme %>
+  verify: <%= @consul_verify ? 'true' : 'false' %>
+<% if @consul_url != nil -%>
+  url: <%= @consul_url %>
+<% end -%>
+<% if @consul_token != nil -%>
+  token: <%= @consul_token %>
+<% end -%>
+<% if @consul_cacert != nil -%>
+  cacert: <%= @consul_cacert %>
+<% end -%>
+<% if @consul_cert != nil -%>
+  cert: <%= @consul_cert %>
+<% end -%>
+<% if @consul_key != nil -%>
+  key: <%= @consul_key %>
+<% end -%>
+<% if @consul_dc != nil -%>
+  dc: <%= @consul_dc %>
+<% end -%>
+<% if @consul_checks != nil -%>
+  checks: <%= @consul_checks %>
+<% end -%>
+<% end -%>
