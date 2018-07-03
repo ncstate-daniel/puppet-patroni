@@ -55,28 +55,44 @@ but you need to get the software installed.  One pretty easy recommendation I ha
 
 ### Beginning with patroni
 
-The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
+A bare minimum configuration might be:
+
+```text
+class { '::patroni':
+  scope => 'mycluster',
+}
+```
+
+This assumes you have taken care of all of the rest of the components needed for Patroni.
 
 ## Usage
 
-This section is where you describe how to customize, configure, and do the fancy stuff with your module here. It's especially helpful if you include usage examples and code samples for doing things with your module.
+If you want to use PostgreSQL's own repositories, you could do something like:
+
+```puppet
+class { '::postgresql::globals':
+  manage_package_repo => true,
+}
+package { 'postgresql96-server':
+  ensure => present,
+}
+class { '::patroni':
+  scope => 'mycluster',
+}
+```
 
 ## Reference
 
-Users need a complete list of your module's classes, types, defined types providers, facts, and functions, along with the parameters for each. You can provide this list either via Puppet Strings code comments or as a complete list in the README Reference section.
+All of the Patroni settings I could find in the [Patroni Settings Documentation](https://github.com/zalando/patroni/blob/master/docs/SETTINGS.rst) are mapped to this module.
+However, I do not have experience with the bulk of those settings, so implementing them here was done
+as a best guess.
 
-* If you are using Puppet Strings code comments, this Reference section should include Strings information so that your users know how to access your documentation.
-
-* If you are not using Puppet Strings, include a list of all of your classes, defined types, and so on, along with their parameters. Each element in this listing should include:
-
-  * The data type, if applicable.
-  * A description of what the element does.
-  * Valid values, if the data type doesn't make it obvious.
-  * Default value, if any.
+At some point all of the options will be documented here, but in the meantime, you can look at the
+init.pp for the module to see what all settings it accepts.
 
 ## Limitations
 
-This is currently only supported on RedHat based systems, and of the RHEL7 era and newer.
+This is currently only supported on RedHat Enterprise Linux 7 based systems.
 
 ## Development
 
