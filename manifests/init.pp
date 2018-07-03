@@ -37,7 +37,7 @@ class patroni (
   String $callback_on_role_change      = undef,
   String $callback_on_start            = undef,
   String $callback_on_stop             = undef,
-  Strubg $pgsql_connect_address        = $patroni::params::pgsql_connect_address,
+  String $pgsql_connect_address        = $patroni::params::pgsql_connect_address,
   Array[String] $pgsql_create_replica_methods = $patroni::params::pgsql_create_replica_methods,
   String $pgsql_data_dir               = $patroni::params::pgsql_data_dir,
   String $pgsql_config_dir             = $patroni::params::pgsql_config_dir,
