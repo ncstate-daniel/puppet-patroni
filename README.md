@@ -8,7 +8,7 @@
 [![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/jadestorm/patroni.svg)](https://forge.puppetlabs.com/jadestorm/patroni)
 [![Puppet Forge - scores](https://img.shields.io/puppetforge/f/jadestorm/patroni.svg)](https://forge.puppetlabs.com/jadestorm/patroni)
 
-#### Table of Contents
+## Table of Contents
 
 1. [Description](#description)
 2. [Setup - The basics of getting started with patroni](#setup)
@@ -57,7 +57,7 @@ but you need to get the software installed.  One pretty easy recommendation I ha
 
 A bare minimum configuration might be:
 
-```text
+```puppet
 class { '::patroni':
   scope => 'mycluster',
 }

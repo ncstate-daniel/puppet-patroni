@@ -8,7 +8,10 @@
   "project_page": "https://github.com/jadestorm/puppet-patroni",
   "issues_url": "https://github.com/jadestorm/puppet-patroni/issues",
   "dependencies": [
-
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.13.1 < 5.0.0"
+    }
   ],
   "operatingsystem_support": [
     {
