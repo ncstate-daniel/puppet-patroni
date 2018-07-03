@@ -36,7 +36,7 @@ bootstrap:
 <% unless @bootstrap_pg_hba.empty? -%>
   pg_hba:
 <% @bootstrap_pg_hba.each do |entry| -%>
-    - <%= entry -%>
+    - <%= entry %>
 <% end -%>
 <% end -%>
 <% unless @bootstrap_users.empty? -%>
@@ -49,7 +49,7 @@ bootstrap:
 <% if settings[options] && settings[options].empty? -%>
       options:
 <% settings[options].each do |option| -%>
-        - <%= option -%>
+        - <%= option %>
 <% end -%>
 <% end -%>
 <% end -%>
@@ -108,15 +108,18 @@ postgresql:
 <% @pgsql_recovery_conf.each do |name,val| -%>
     <%= name -%>: <%= val %>
 <% end -%>
+<% end -%>
 <% unless @pgsql_custom_conf.empty? -%>
   custom_conf:
 <% @pgsql_custom_conf.each do |name,val| -%>
     <%= name -%>: <%= val %>
 <% end -%>
+<% end -%>
 <% unless @pgsql_parameters.empty? -%>
   parameters:
 <% @pgsql_parameters.each do |name,val| -%>
     <%= name -%>: <%= val %>
+<% end -%>
 <% end -%>
 <% unless @pgsql_replica_method.empty? -%>
   replica_method:
@@ -124,6 +127,7 @@ postgresql:
     <%= name -%>:
 <% settings.each do |setname,setval| -%>
       <%= setname -%>: <%= setval %>
+<% end -%>
 <% end -%>
 <% end -%>
 
@@ -184,12 +188,12 @@ etcd:
   key: <%= @etcd_key %>
 <% end -%>
 <% end -%>
-<% @use_zookeeper -%>
+<% if @use_zookeeper -%>
 
 zookeeper:
   hosts: <%= @zookeeper_hosts.join(',') %>
 <% end -%>
-<% @use_exhibitor -%>
+<% if @use_exhibitor -%>
 
 exhibitor:
   hosts:
@@ -199,7 +203,7 @@ exhibitor:
   poll_interval: <%= @exhibitor_poll_interval %>
   port: <%= @exhibitor_port %>
 <% end -%>
-<% @use_kubernetes -%>
+<% if @use_kubernetes -%>
 
 kubernetes:
   namespace: <%= @kubernetes_namespace %>
@@ -223,7 +227,7 @@ kubernetes:
   ports: <%= @kubernetes_ports %>
 <% end -%>
 <% end -%>
-<% @use_consul -%>
+<% if @use_consul -%>
 
 consul:
   host: <%= @consul_host %>
