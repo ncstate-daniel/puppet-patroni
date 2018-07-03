@@ -71,7 +71,7 @@ class patroni (
   # Etcd Settings
   Boolean $use_etcd      = $patroni::params::use_etcd,
   String $etcd_host      = $patroni::params::etcd_host,
-  Array[String] $etcd_endpoints = [],
+  Array[String] $etcd_hosts = [],
   Variant[Undef,String] $etcd_url       = undef,
   Variant[Undef,String] $etcd_proxyurl  = undef,
   Variant[Undef,String] $etcd_srv       = undef,
