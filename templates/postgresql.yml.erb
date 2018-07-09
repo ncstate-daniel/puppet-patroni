@@ -65,8 +65,12 @@ postgresql:
   listen: <%= @pgsql_listen %>
   connect_address: <%= @pgsql_connect_address %>
   data_dir: <%= @pgsql_data_dir %>
+<% if @pgsql_bin_dir != nil -%>
   bin_dir: <%= @pgsql_bin_dir %>
+<% end -%>
+<% if @pgsql_config_dir != nil -%>
   config_dir: <%= @pgsql_config_dir %>
+<% end -%>
   use_unix_socket: <%= @pgsql_use_unix_socket ? 'true' : 'false' %>
   pgpass: <%= @pgsql_pgpass_path %>
   pg_ctl_timeout: <%= @pgsql_pg_ctl_timeout %>
