@@ -24,7 +24,7 @@ class patroni::params {
     'host replication rep_user 0.0.0.0/0 md5',
   ]
 
-  $superuser_username           = 'superuser'
+  $superuser_username           = 'postgres'
   $superuser_password           = 'changeme'
   $replication_username         = 'rep_user'
   $replication_password         = 'changeme'
