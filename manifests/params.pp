@@ -18,7 +18,7 @@ class patroni::params {
   $bootstrap_method             = 'initdb'
   $initdb_data_checksums        = true
   $initdb_encoding              = 'UTF8'
-  $initdb_locale                = 'UTF8'
+
   $bootstrap_pg_hba             = [
     'host all all 0.0.0.0/0 md5',
     'host replication replicator 127.0.0.1/32 md5',
@@ -75,6 +75,7 @@ class patroni::params {
       $config_owner = 'root'
       $config_group = 'root'
       $config_mode  = '0644'
+      $initdb_locale = 'en_US.utf8'
 
       case $::operatingsystemmajrelease {
         '7': {
