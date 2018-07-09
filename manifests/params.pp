@@ -21,15 +21,15 @@ class patroni::params {
 
   $bootstrap_pg_hba             = [
     'host all all 0.0.0.0/0 md5',
-    'host replication replicator 127.0.0.1/32 md5',
+    'host replication rep_user 0.0.0.0/0 md5',
   ]
 
   $superuser_username           = 'superuser'
   $superuser_password           = 'changeme'
-  $replication_username         = 'replication'
+  $replication_username         = 'rep_user'
   $replication_password         = 'changeme'
 
-  $pgsql_connect_address        = '127.0.0.1:5432'
+  $pgsql_connect_address        = "${::fqdn}:5432"
   $pgsql_create_replica_methods = ['basebackup']
 
   $pgsql_listen                 = '0.0.0.0:5432'
@@ -58,7 +58,7 @@ class patroni::params {
   $kubernetes_use_endpoints = false
   $kubernetes_namespace     = 'default'
 
-  $restapi_connect_address = '127.0.0.1:8008'
+  $restapi_connect_address = "${::fqdn}:8008"
   $restapi_listen          = '0.0.0.0:8008'
 
   $use_zookeeper = false
