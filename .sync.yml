@@ -1,0 +1,4 @@
+Gemfile:
+  optional:
+    ':development':
+      - gem: coveralls
