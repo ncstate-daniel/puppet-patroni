@@ -203,12 +203,20 @@ However, I do not have experience with the bulk of those settings, so implementi
 as a best guess.
 
 At some point all of the options will be documented here, but in the meantime, you can look at the
-init.pp for the module to see what all settings it accepts.  I hope to improve the documentation
-at some point, but wanted to get this out there if others need it.
+[init.pp](https://github.com/jadestorm/puppet-patroni/blob/master/manifests/init.pp) for the module to
+see what all settings it accepts.  I hope to improve the documentation at some point, but wanted to get
+this out there if others need it.
+
+I also highly recommend checking out
+[PostgreSQL High Availability Cookbook](https://www.amazon.com/PostgreSQL-High-Availability-Cookbook-Second/dp/178712553X)
+as it is a fantastic resource for wrapping your head around all of the options and has a great walkthrough
+for setting up Patroni.
 
 ## Limitations
 
-This is currently only supported on RedHat Enterprise Linux 7 based systems.
+This is currently only supported on RedHat Enterprise Linux 7 based systems.  I would love to
+see support on other distributions and even OS's, so if you are interested in contributing please
+do so!
 
 ## Development
 
