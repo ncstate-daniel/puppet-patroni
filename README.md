@@ -81,6 +81,121 @@ class { '::patroni':
 }
 ```
 
+A much more fleshed out example might be something like:
+
+```puppet
+# First PostgreSQL server
+node pg1 {
+  class { '::etcd':
+    etcd_name                   => ${::hostname},
+    listen_client_urls          => 'http://0.0.0.0:2379',
+    advertise_client_urls       => "http://${::fqdn}:2379",
+    listen_peer_urls            => 'http://0.0.0.0:2380',
+    initial_advertise_peer_urls => "http://${::fqdn}:2380",
+    initial_cluster             => [
+      'pgarb=http://pgarb.example.org:2380',
+      'pg1=http://pg1.example.org:2380',
+      'pg2=http://pg2.example.org:2380',
+    ],
+    initial_cluster_state       => 'existing',
+  }
+
+  class { '::postgresql::globals':
+    encoding            => 'UTF-8',
+    locale              => 'en_US.UTF-8',
+    manage_package_repo => true,
+    version             => '9.6',
+  }
+  package { ['postgresql96-server','postgresql96-contrib']:
+    ensure => present,
+  }
+
+  class { '::patroni':
+    scope                   => 'mycluster',
+    use_etcd                => true,
+    pgsql_connect_address   => "${::fqdn}:5432",
+    restapi_connect_address => "${::fqdn}:8008",
+    pgsql_bin_dir           => '/usr/pgsql-9.6/bin',
+    pgsql_data_dir          => '/var/lib/pgsql/9.6/data',
+    pgsql_pgpass_path       => '/var/lib/pgsql/pgpass',
+    pgsql_parameters        => {
+      'max_connections' => 5000,
+    },
+    pgsql_pg_hba            => [
+      'host all all 0.0.0.0/0 md5',
+      'host replication rep_user 0.0.0.0/0 md5',
+    ],
+    superuser_username      => 'postgres',
+    superuser_password      => 'somepassword',
+    replication_username    => 'rep_user',
+    replication_password    => 'someotherpassword',
+  }
+}
+# Second PostgreSQL server
+node pg2 {
+  class { '::etcd':
+    etcd_name                   => ${::hostname},
+    listen_client_urls          => 'http://0.0.0.0:2379',
+    advertise_client_urls       => "http://${::fqdn}:2379",
+    listen_peer_urls            => 'http://0.0.0.0:2380',
+    initial_advertise_peer_urls => "http://${::fqdn}:2380",
+    initial_cluster             => [
+      'pgarb=http://pgarb.example.org:2380',
+      'pg1=http://pg1.example.org:2380',
+      'pg2=http://pg2.example.org:2380',
+    ],
+    initial_cluster_state       => 'existing',
+  }
+
+  class { '::postgresql::globals':
+    encoding            => 'UTF-8',
+    locale              => 'en_US.UTF-8',
+    manage_package_repo => true,
+    version             => '9.6',
+  }
+  package { ['postgresql96-server','postgresql96-contrib']:
+    ensure => present,
+  }
+
+  class { '::patroni':
+    scope                   => 'mycluster',
+    use_etcd                => true,
+    pgsql_connect_address   => "${::fqdn}:5432",
+    restapi_connect_address => "${::fqdn}:8008",
+    pgsql_bin_dir           => '/usr/pgsql-9.6/bin',
+    pgsql_data_dir          => '/var/lib/pgsql/9.6/data',
+    pgsql_pgpass_path       => '/var/lib/pgsql/pgpass',
+    pgsql_parameters        => {
+      'max_connections' => 5000,
+    },
+    pgsql_pg_hba            => [
+      'host all all 0.0.0.0/0 md5',
+      'host replication rep_user 0.0.0.0/0 md5',
+    ],
+    superuser_username      => 'postgres',
+    superuser_password      => 'somepassword',
+    replication_username    => 'rep_user',
+    replication_password    => 'someotherpassword',
+  }
+}
+# Simple etcd arbitrator node, meaning it serves no content of it's own, just helps keep quorum
+node pgarb {
+  class { '::etcd':
+    etcd_name                   => ${::hostname},
+    listen_client_urls          => 'http://0.0.0.0:2379',
+    advertise_client_urls       => "http://${::fqdn}:2379",
+    listen_peer_urls            => 'http://0.0.0.0:2380',
+    initial_advertise_peer_urls => "http://${::fqdn}:2380",
+    initial_cluster             => [
+      'pgarb=http://pgarb.example.org:2380',
+      'pg1=http://pg1.example.org:2380',
+      'pg2=http://pg2.example.org:2380',
+    ],
+    initial_cluster_state       => 'existing',
+  }
+}
+```
+
 ## Reference
 
 All of the Patroni settings I could find in the [Patroni Settings Documentation](https://github.com/zalando/patroni/blob/master/docs/SETTINGS.rst) are mapped to this module.
@@ -88,7 +203,8 @@ However, I do not have experience with the bulk of those settings, so implementi
 as a best guess.
 
 At some point all of the options will be documented here, but in the meantime, you can look at the
-init.pp for the module to see what all settings it accepts.
+init.pp for the module to see what all settings it accepts.  I hope to improve the documentation
+at some point, but wanted to get this out there if others need it.
 
 ## Limitations
 
