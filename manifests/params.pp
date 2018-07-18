@@ -1,9 +1,10 @@
 # Default parameters
 class patroni::params {
-  $ensure_package = 'present'
-  $ensure_service = 'running'
-  $enable_service = true
-  $namespace      = '/service/'
+  $ensure_package  = 'present'
+  $ensure_service  = 'running'
+  $enable_service  = true
+  $restart_service = false
+  $namespace       = '/service/'
 
   $dcs_loop_wait                = 10
   $dcs_ttl                      = 30

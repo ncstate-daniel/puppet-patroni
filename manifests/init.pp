@@ -122,14 +122,25 @@ class patroni (
   String $config_owner    = $patroni::params::config_owner,
   String $config_group    = $patroni::params::config_group,
   String $config_mode     = $patroni::params::config_mode,
-  String $ensure_package = $patroni::params::ensure_package,
-  String $ensure_service = $patroni::params::ensure_service,
-  Boolean $enable_service = $patroni::params::enable_service,
+  String $ensure_package  = $patroni::params::ensure_package,
+  String $ensure_service  = $patroni::params::ensure_service,
+  Boolean $enable_service  = $patroni::params::enable_service,
+  Boolean $restart_service = $patroni::params::restart_service,
 
 ) inherits patroni::params {
   anchor{'patroni::begin':}
   -> class{'::patroni::install':}
   -> class{'::patroni::config':}
-  ~> class{'::patroni::service':}
+
+  if $restart_service {
+    Class['::patroni::config']
+    ~> class{'::patroni::service':}
+  }
+  else {
+    Class['::patroni::config']
+    -> class{'::patroni::service':}
+  }
+
+  Class['::patroni::service']
   -> anchor{'patroni::end':}
 }

@@ -1,6 +1,6 @@
 {
   "name": "jadestorm-patroni",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "jadestorm",
   "summary": "Installs and manages Patroni for high-availability PostgreSQL",
   "license": "Apache-2.0",
@@ -44,6 +44,13 @@
       "name": "puppet",
       "version_requirement": ">= 4.7.0 < 6.0.0"
     }
+  ],
+  "tags": [
+    "patroni",
+    "pgsql",
+    "postgresql",
+    "cluster",
+    "ha"
   ],
   "pdk-version": "1.5.0",
   "template-url": "https://github.com/puppetlabs/pdk-templates",
