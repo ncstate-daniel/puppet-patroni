@@ -62,6 +62,7 @@ class patroni (
   Enum['http','https'] $consul_scheme = $patroni::params::consul_scheme,
   Variant[Undef,String] $consul_token   = undef,
   Boolean $consul_verify = $patroni::params::consul_verify,
+  Optional[Boolean] $consul_register_service = undef,
   Variant[Undef,String] $consul_cacert  = undef,
   Variant[Undef,String] $consul_cert    = undef,
   Variant[Undef,String] $consul_key     = undef,

@@ -259,4 +259,7 @@ consul:
 <% if @consul_checks != nil -%>
   checks: <%= @consul_checks %>
 <% end -%>
+<% if @consul_register_service != nil -%>
+  register_service: <%= @consul_register_service %>
+<% end -%>
 <% end -%>
