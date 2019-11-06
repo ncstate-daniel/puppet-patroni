@@ -10,7 +10,7 @@ bootstrap:
     maximum_lag_on_failover: <%= @dcs_maximum_lag_on_failover %>
     master_start_timeout: <%= @dcs_master_start_timeout %>
     synchronous_mode: <%= @dcs_synchronous_mode %>
-    synchronous_mode_struct: <%= @dcs_synchronous_mode_strict %>
+    synchronous_mode_strict: <%= @dcs_synchronous_mode_strict %>
     postgresql:
       use_pg_rewind: <%= @dcs_postgresql_use_pg_rewind ? 'true' : 'false' %>
       use_slots: <%= @dcs_postgresql_use_slots ? 'true' : 'false' %>
