@@ -119,9 +119,9 @@ postgresql:
     <%= name -%>: <%= val %>
 <% end -%>
 <% end -%>
-<% unless @pgsql_parameters.empty? -%>
+<% unless @pgsql_parameters_all.empty? -%>
   parameters:
-<% @pgsql_parameters.each do |name,val| -%>
+<% @pgsql_parameters_all.each do |name,val| -%>
     <%= name -%>: <%= val %>
 <% end -%>
 <% end -%>

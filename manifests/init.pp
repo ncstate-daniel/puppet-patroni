@@ -51,6 +51,7 @@ class patroni (
   Array[String] $pgsql_pg_hba          = [],
   Integer $pgsql_pg_ctl_timeout        = $patroni::params::pgsql_pg_ctl_timeout,
   Boolean $pgsql_use_pg_rewind         = $patroni::params::pgsql_use_pg_rewind,
+  Boolean $hiera_merge_pgsql_parameters = $patroni::params::hiera_merge_pgsql_parameters,
   Boolean $pgsql_remove_data_directory_on_rewind_failure = $patroni::params::pgsql_remove_data_directory_on_rewind_failure,
   Array[Hash] $pgsql_replica_method    = [],
 
@@ -129,6 +130,19 @@ class patroni (
   Boolean $restart_service = $patroni::params::restart_service,
 
 ) inherits patroni::params {
+
+  if $hiera_merge_pgsql_parameters == true {
+    $pgsql_parameters_all = lookup( { 'name'          => 'patroni::pgsql_parameters',
+                                      'value_type'    => undef,
+                                      'merge'         => {
+                                         'strategy'   => 'deep',
+                                       }, 
+                                      'default_value' => $pgsql_parameters,
+                                     })
+  } else {
+    $pgsql_parameters_all = $pgsql_parameters
+  }
+
   anchor{'patroni::begin':}
   -> class{'::patroni::install':}
   -> class{'::patroni::config':}
