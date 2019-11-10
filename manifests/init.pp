@@ -46,7 +46,7 @@ class patroni (
   Boolean $pgsql_use_unix_socket       = $patroni::params::pgsql_use_unix_socket,
   String $pgsql_pgpass_path            = $patroni::params::pgsql_pgpass_path,
   Hash $pgsql_recovery_conf            = {},
-  Hash $pgsql_custom_conf              = {},
+  Variant[Undef,String]  $pgsql_custom_conf           = undef,
   Hash $pgsql_parameters               = {},
   Array[String] $pgsql_pg_hba          = [],
   Integer $pgsql_pg_ctl_timeout        = $patroni::params::pgsql_pg_ctl_timeout,
