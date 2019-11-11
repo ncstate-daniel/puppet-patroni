@@ -135,10 +135,10 @@ class patroni (
     $pgsql_parameters_all = lookup( { 'name'          => 'patroni::pgsql_parameters',
                                       'value_type'    => undef,
                                       'merge'         => {
-                                         'strategy'   => 'deep',
-                                       }, 
+                                        'strategy'   => 'deep',
+                                      },
                                       'default_value' => $pgsql_parameters,
-                                     })
+                                    })
   } else {
     $pgsql_parameters_all = $pgsql_parameters
   }
