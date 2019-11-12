@@ -10,7 +10,7 @@ bootstrap:
     maximum_lag_on_failover: <%= @dcs_maximum_lag_on_failover %>
     master_start_timeout: <%= @dcs_master_start_timeout %>
     synchronous_mode: <%= @dcs_synchronous_mode %>
-    synchronous_mode_struct: <%= @dcs_synchronous_mode_strict %>
+    synchronous_mode_strict: <%= @dcs_synchronous_mode_strict %>
     postgresql:
       use_pg_rewind: <%= @dcs_postgresql_use_pg_rewind ? 'true' : 'false' %>
       use_slots: <%= @dcs_postgresql_use_slots ? 'true' : 'false' %>
@@ -107,21 +107,24 @@ postgresql:
     - <%= entry %>
 <% end -%>
 <% end -%>
+<% unless @pgsql_pg_hba.empty? -%>
+  pg_hba:
+<% @pgsql_pg_hba.each do |entry| -%>
+    - <%= entry %>
+<% end -%>
+<% end -%>
 <% unless @pgsql_recovery_conf.empty? -%>
   recovery_conf:
 <% @pgsql_recovery_conf.each do |name,val| -%>
     <%= name -%>: <%= val %>
 <% end -%>
 <% end -%>
-<% unless @pgsql_custom_conf.empty? -%>
-  custom_conf:
-<% @pgsql_custom_conf.each do |name,val| -%>
-    <%= name -%>: <%= val %>
+<% if @pgsql_custom_conf != nil -%>
+  pgsql_custom_conf: <%= @pgsql_custom_conf %>
 <% end -%>
-<% end -%>
-<% unless @pgsql_parameters.empty? -%>
+<% unless @pgsql_parameters_all.empty? -%>
   parameters:
-<% @pgsql_parameters.each do |name,val| -%>
+<% @pgsql_parameters_all.each do |name,val| -%>
     <%= name -%>: <%= val %>
 <% end -%>
 <% end -%>
@@ -258,5 +261,8 @@ consul:
 <% end -%>
 <% if @consul_checks != nil -%>
   checks: <%= @consul_checks %>
+<% end -%>
+<% if @consul_register_service != nil -%>
+  register_service: <%= @consul_register_service %>
 <% end -%>
 <% end -%>

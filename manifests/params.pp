@@ -39,6 +39,7 @@ class patroni::params {
 
   $pgsql_pg_ctl_timeout         = 60
   $pgsql_use_pg_rewind          = true
+  $hiera_merge_pgsql_parameters = false
   $pgsql_remove_data_directory_on_rewind_failure = false
 
   $use_consul    = false
