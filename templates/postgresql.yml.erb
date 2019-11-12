@@ -107,6 +107,12 @@ postgresql:
     - <%= entry %>
 <% end -%>
 <% end -%>
+<% unless @pgsql_pg_hba.empty? -%>
+  pg_hba:
+<% @pgsql_pg_hba.each do |entry| -%>
+    - <%= entry %>
+<% end -%>
+<% end -%>
 <% unless @pgsql_recovery_conf.empty? -%>
   recovery_conf:
 <% @pgsql_recovery_conf.each do |name,val| -%>
