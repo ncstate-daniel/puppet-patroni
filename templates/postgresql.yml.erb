@@ -120,7 +120,7 @@ postgresql:
 <% end -%>
 <% end -%>
 <% if @pgsql_custom_conf != nil -%>
-  pgsql_custom_conf: <%= @pgsql_custom_conf %>
+  custom_conf: <%= @pgsql_custom_conf %>
 <% end -%>
 <% unless @pgsql_parameters_all.empty? -%>
   parameters:
