@@ -83,6 +83,9 @@ class patroni::params {
         '7': {
           $pgsql_data_dir   = '/var/lib/pgsql/9.2/data'
         }
+        '8': {
+          $pgsql_data_dir   = '/var/lib/pgsql/data'
+        }
         default: {
           fail("This operating system version (${::operatingsystemmajrelease}) is not supported.")
         }
