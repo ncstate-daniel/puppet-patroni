@@ -111,7 +111,7 @@ class patroni::params {
         }
         default: {
           warning("This operating system version (${::operatingsystemmajrelease}) is not supported.
-                  '$pgsql_data_dir' must be specified manually.")
+                  'pgsql_data_dir' variable must be specified manually.")
         }
       }
     }
