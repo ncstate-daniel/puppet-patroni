@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.1.3
+
+* Added support for the latest consul configuration options - consistency, service_check_interval
+* Added support for custom patroni service restart command (useful for reload only)
+* Added support for Debian
+
 ## Release 0.1.2
 
 ### BREAKING CHANGES (sort of, didn't work previously)

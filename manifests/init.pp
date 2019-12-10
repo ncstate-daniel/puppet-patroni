@@ -64,6 +64,8 @@ class patroni (
   Variant[Undef,String] $consul_token   = undef,
   Boolean $consul_verify = $patroni::params::consul_verify,
   Optional[Boolean] $consul_register_service = undef,
+  Optional[String] $consul_service_check_interval = undef,
+  Optional[Enum['default', 'consistent', 'stale']] $consul_consistency = undef,
   Variant[Undef,String] $consul_cacert  = undef,
   Variant[Undef,String] $consul_cert    = undef,
   Variant[Undef,String] $consul_key     = undef,
@@ -128,6 +130,7 @@ class patroni (
   String $ensure_service  = $patroni::params::ensure_service,
   Boolean $enable_service  = $patroni::params::enable_service,
   Boolean $restart_service = $patroni::params::restart_service,
+  Optional[String] $restart_service_command = undef,
 
 ) inherits patroni::params {
 
