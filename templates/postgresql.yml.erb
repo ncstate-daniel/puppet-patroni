@@ -259,10 +259,16 @@ consul:
 <% if @consul_dc != nil -%>
   dc: <%= @consul_dc %>
 <% end -%>
+<% if @consul_consistency != nil -%>
+  consistency: <%= @consul_consistency %>
+<% end -%>
 <% if @consul_checks != nil -%>
   checks: <%= @consul_checks %>
 <% end -%>
 <% if @consul_register_service != nil -%>
   register_service: <%= @consul_register_service %>
+<% end -%>
+<% if @consul_service_check_interval != nil -%>
+  service_check_interval: <%= @consul_service_check_interval %>
 <% end -%>
 <% end -%>
