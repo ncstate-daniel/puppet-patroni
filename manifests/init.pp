@@ -23,7 +23,7 @@ class patroni (
   String $initdb_encoding               = $patroni::params::initdb_encoding,
   String $initdb_locale                 = $patroni::params::initdb_locale,
   Array[String] $bootstrap_pg_hba       = $patroni::params::bootstrap_pg_hba,
-  Array[Hash] $bootstrap_users          = [],
+  Hash $bootstrap_users                 = {},
   Variant[Undef,String] $bootstrap_post_bootstrap      = undef,
   Variant[Undef,String] $bootstrap_post_init           = undef,
 
