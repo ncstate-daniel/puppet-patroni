@@ -43,12 +43,12 @@ bootstrap:
   users:
 <% @bootstrap_users.each do |name,settings| -%>
     <%= name -%>:
-<% if settings[password] -%>
-      password: <%= settings[password] %>
+<% if settings['password'] -%>
+      password: <%= settings['password'] %>
 <% end -%>
-<% if settings[options] && settings[options].empty? -%>
+<% if settings['options'] && settings['options'].empty? -%>
       options:
-<% settings[options].each do |option| -%>
+<% settings['options'].each do |option| -%>
         - <%= option %>
 <% end -%>
 <% end -%>
