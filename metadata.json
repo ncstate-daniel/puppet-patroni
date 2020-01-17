@@ -1,6 +1,6 @@
 {
   "name": "jadestorm-patroni",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "jadestorm",
   "summary": "Installs and manages Patroni for high-availability PostgreSQL",
   "license": "Apache-2.0",
