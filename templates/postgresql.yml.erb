@@ -46,7 +46,7 @@ bootstrap:
 <% if settings['password'] -%>
       password: <%= settings['password'] %>
 <% end -%>
-<% if settings['options'] && settings['options'].empty? -%>
+<% if settings.has_key? 'options' && !settings['options'].empty? -%>
       options:
 <% settings['options'].each do |option| -%>
         - <%= option %>
