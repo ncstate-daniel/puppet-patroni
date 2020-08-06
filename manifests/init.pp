@@ -109,6 +109,7 @@ class patroni (
   Variant[Undef,String] $restapi_password        = undef,
   Variant[Undef,String] $restapi_certfile        = undef,
   Variant[Undef,String] $restapi_keyfile         = undef,
+  Optional[String] $restapi_cafile               = undef,
   Optional[Enum['none','optional','required']] $restapi_verify_client = undef,
 
   # ZooKeeper Settings
