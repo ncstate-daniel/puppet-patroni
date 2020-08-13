@@ -147,6 +147,12 @@ restapi:
 <% if @restapi_keyfile != nil -%>
   keyfile: <%= @restapi_keyfile %>
 <% end -%>
+<% if @restapi_cafile != nil %>
+  cafile: <%= @restapi_cafile %>
+<% end -%>
+<% if @restapi_verify_client != nil -%>
+  verify_client: <%= @restapi_verify_client %>
+<% end -%>
 <% if @restapi_username != nil && @restapi_password != nil -%>
   authentication:
     username: <%= @restapi_username %>
