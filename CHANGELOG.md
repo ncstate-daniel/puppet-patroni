@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.1.6
+
+* Add restapi_verify_client parameter.  ([PR #9](https://github.com/jadestorm/puppet-patroni/pull/9)) ([treydock](https://github.com/treydock))
+
 ## Release 0.1.5
 
 * Properly fixed bug with bootstrap_users not being handled correctly (was broken before).  ([issue #7](https://github.com/jadestorm/puppet-patroni/issues/7)) ([rujim](https://github.com/rujim))
