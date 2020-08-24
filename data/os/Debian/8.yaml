@@ -1,0 +1,2 @@
+---
+pgsql_data_dir: '/var/lib/postgresql/9.4/patroni'

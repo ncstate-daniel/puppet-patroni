@@ -1,0 +1,2 @@
+---
+config_path: '/opt/app/patroni/etc/postgresql.yml'

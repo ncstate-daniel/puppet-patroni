@@ -122,9 +122,9 @@ postgresql:
 <% if @pgsql_custom_conf != nil -%>
   custom_conf: <%= @pgsql_custom_conf %>
 <% end -%>
-<% unless @pgsql_parameters_all.empty? -%>
+<% unless @pgsql_parameters.empty? -%>
   parameters:
-<% @pgsql_parameters_all.each do |name,val| -%>
+<% @pgsql_parameters.each do |name,val| -%>
     <%= name -%>: <%= val %>
 <% end -%>
 <% end -%>

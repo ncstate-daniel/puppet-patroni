@@ -63,6 +63,16 @@ class { '::patroni':
 }
 ```
 
+If you specify `patroni::pgsql_parameters` at multiple levels in Hiera
+and would like to merge them, add the following to your `common.yaml`
+(or lowest priority Hiera level).
+
+```yaml
+lookup_options:
+  patroni::pgsql_parameters:
+    merge: deep
+```
+
 This assumes you have taken care of all of the rest of the components needed for Patroni.
 
 ## Usage

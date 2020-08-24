@@ -1,0 +1,2 @@
+---
+config_path: '/etc/patroni/config.yml'
