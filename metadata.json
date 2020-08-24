@@ -49,7 +49,7 @@
     "cluster",
     "ha"
   ],
-  "pdk-version": "1.14.1",
+  "pdk-version": "1.18.1",
   "template-url": "https://github.com/puppetlabs/pdk-templates#master",
-  "template-ref": "heads/master-0-g643529a"
+  "template-ref": "heads/master-0-ga58fd92"
 }
