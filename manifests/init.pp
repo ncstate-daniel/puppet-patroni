@@ -128,6 +128,7 @@ class patroni (
   # Module Specific Settings
   String $servicename = 'patroni',
   String $packagename = 'patroni',
+  Optional[String[1]] $package_provider = undef,
   String $config_path = '/opt/app/patroni/etc/postgresql.yml',
   String $config_owner = 'root',
   String $config_group = 'root',
@@ -142,6 +143,7 @@ class patroni (
   package { 'patroni':
     ensure   => $ensure_package,
     name     => $packagename,
+    provider => $package_provider,
   }
 
   file { 'patroni_config':
