@@ -1,5 +1,8 @@
 
-# patroni
+# DEPRECATED patroni module
+
+This module has been deprecated. This module is now maintained by
+[Tailored Automation](https://github.com/tailored-automation/puppet-module-patroni).
 
 [![Build Status](https://travis-ci.org/jadestorm/puppet-patroni.png?branch=master)](https://travis-ci.org/jadestorm/puppet-patroni)
 [![Code Coverage](https://coveralls.io/repos/github/jadestorm/puppet-patroni/badge.svg?branch=master)](https://coveralls.io/github/jadestorm/puppet-patroni?branch=master)

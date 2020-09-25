@@ -1,8 +1,8 @@
 {
   "name": "jadestorm-patroni",
-  "version": "0.1.6",
+  "version": "999.999.999",
   "author": "jadestorm",
-  "summary": "Installs and manages Patroni for high-availability PostgreSQL",
+  "summary": "DEPRECATED: Installs and manages Patroni for high-availability PostgreSQL",
   "license": "Apache-2.0",
   "source": "https://github.com/jadestorm/puppet-patroni",
   "project_page": "https://github.com/jadestorm/puppet-patroni",
